@@ -42,7 +42,7 @@ class Comment extends Model
 
     public function replies()
     {
-        return $this->children()->with('replies');
+        return $this->children()->withDepth()->with('replies')->latest();
     }
 
     /*

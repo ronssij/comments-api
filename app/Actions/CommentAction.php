@@ -20,13 +20,13 @@ class CommentAction
             ]);
 
             $comment = Comment::create($data, $parent);
+            $comment->load('replies');
 
-            return $comment->load('replies');
-
+        } else {
+            $comment = $blog->comments()->create($data);
+            $comment->load('replies');
         }
 
-        $comment = $blog->comments()->create($data);
-
-        return $comment->load('replies');
+        return $blog->comments()->find($comment->id);
     }
 }

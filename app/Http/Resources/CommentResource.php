@@ -21,6 +21,7 @@ class CommentResource extends Resource
             'username'   => $this->username,
             'comment'    => $this->comment,
             'created_at' => $this->created_at->diffForHumans(),
+            'depth'      => $this->depth,
 
             // Relationships
             'blog'    => BlogResource::make($this->whenLoaded('blog')),
