@@ -19,9 +19,14 @@ class CommentAction
                 'parent_id' => $comment
             ]);
 
-            return Comment::create($data, $parent);
+            $comment = Comment::create($data, $parent);
+
+            return $comment->load('replies');
+
         }
 
-        return $blog->comments()->create($data);
+        $comment = $blog->comments()->create($data);
+
+        return $comment->load('replies');
     }
 }
