@@ -12,9 +12,10 @@ class BlogController extends Controller
     {
         $blogs = Blog::with([
                 'comments' => function ($query) {
-                    return $query->parentOnly()->with('replies');
+                    return $query->parentOnly()->with('replies')->latest();
                 }
             ])
+            ->latest()
             ->get();
 
         return BlogResource::collection($blogs);
