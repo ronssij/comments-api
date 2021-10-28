@@ -17,7 +17,7 @@ class CommentResource extends Resource
         return [
             'id'         => $this->id,
             'parent_id'  => $this->parent_id,
-            'blog_id'    => $this->blog_id,
+            'blog_id'    => (int) $this->blog_id,
             'username'   => $this->username,
             'comment'    => $this->comment,
             'created_at' => $this->created_at->diffForHumans(),
