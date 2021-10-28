@@ -27,6 +27,6 @@ class CommentAction
             $comment->load('replies');
         }
 
-        return $blog->comments()->find($comment->id);
+        return $blog->comments()->with(['replies'])->find($comment->id);
     }
 }
