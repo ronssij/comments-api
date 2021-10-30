@@ -25,18 +25,21 @@ class CommentActionTest extends TestCase
     /** @test */
     function testCommentActionMockery()
     {
-        /** @var CommentAction */
-        $mock = Mockery::mock(CommentAction::class, function (MockInterface $mock) {
-            $mock->shouldReceive('execute')
-                ->once()
-                ->andReturn(Comment::class);
-        });
-        
-        $mock->execute($this->blog, [
+        $data = [
             'blog_id'  => $this->blog->id,
             'username' => 'cjronxel',
             'comment'  => 'This is a test comment for a blog'
-        ]);
+        ];
+
+        /** @var CommentAction */
+        $mock = Mockery::mock(CommentAction::class, function (MockInterface $mock) use  ($data) {
+            $mock->shouldReceive('execute')
+                ->with($this->blog, $data)
+                ->once()
+                ->andReturnSelf(Comment::class);
+        });
+
+        $mock->execute($this->blog, $data);
     }
 
     /** @test */
