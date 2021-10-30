@@ -5,8 +5,11 @@ namespace Tests\Unit\Actions;
 use Tests\TestCase;
 use App\Models\Blog;
 use App\Actions\CommentAction;
+use App\Models\Comment;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Mockery;
+use Mockery\MockInterface;
 
 class CommentActionTest extends TestCase
 {   
@@ -17,6 +20,23 @@ class CommentActionTest extends TestCase
         parent::setUp();
 
         $this->blog = factory(Blog::class)->create();
+    }
+
+    /** @test */
+    function testCommentActionMockery()
+    {
+        /** @var CommentAction */
+        $mock = Mockery::mock(CommentAction::class, function (MockInterface $mock) {
+            $mock->shouldReceive('execute')
+                ->once()
+                ->andReturn(Comment::class);
+        });
+        
+        $mock->execute($this->blog, [
+            'blog_id'  => $this->blog->id,
+            'username' => 'cjronxel',
+            'comment'  => 'This is a test comment for a blog'
+        ]);
     }
 
     /** @test */
