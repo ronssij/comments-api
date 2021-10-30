@@ -15,7 +15,7 @@ class BlogControllerTest extends TestCase
     {
         parent::setUp();
 
-        $this->blog = factory(Blog::class, 100)->create();
+        factory(Blog::class, 100)->create();
     }
 
     /** @test */
