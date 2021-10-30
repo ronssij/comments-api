@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Actions;
+namespace Tests\Unit\Actions;
 
 use Tests\TestCase;
 use App\Models\Blog;
